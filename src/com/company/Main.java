@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class Main {
 
     public static void main(String[] args) {
-        double riskFreeRate = 0.03;
+        double riskFreeRate = 0.001;
         RiskyBond bond1 = new RiskyBond(5, 100, 0, 0.4, 0.0125, new HashMap<>());
         RiskyBond bond2 = new RiskyBond(5, 100, 10, 0.2, 0.025, new HashMap<>());
         RiskyBond bond3 = new RiskyBond(10, 100, 4, 0.6, 0.005, new HashMap<>());
