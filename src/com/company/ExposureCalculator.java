@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class ExposureCalculator {
 
     static double getExpectedExposure(int yearsToMaturity, double parValue, double couponRate, double riskFreeRate) {
-        double expectedExposureToDefaultLoss = (1 + (couponRate / 100)) * parValue;
+        double expectedExposureToDefaultLoss = (1 + couponRate) * parValue;
         double presentValueFactor = Math.pow(1 + riskFreeRate, yearsToMaturity);
         return expectedExposureToDefaultLoss / presentValueFactor;
     }

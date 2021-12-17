@@ -1,22 +1,33 @@
 package com.company;
 
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        double riskFreeRate = 0.001;
-        RiskyBond bond1 = new RiskyBond(5, 100, 0, 0.4, 0.0125, new HashMap<>());
-        RiskyBond bond2 = new RiskyBond(5, 100, 10, 0.2, 0.025, new HashMap<>());
-        RiskyBond bond3 = new RiskyBond(10, 100, 4, 0.6, 0.005, new HashMap<>());
+        double riskFreeRate = 0.03;
+        Scanner bondScanner = new Scanner(System.in);
+        System.out.println("Welcome to CVA calculator. Please input the characteristics of your bond:");
+        System.out.println("Years to maturity: ");
+        int yearsToMaturity = bondScanner.nextInt();
+        System.out.println("Par value: ");
+        int parValue = bondScanner.nextInt();
+        System.out.println("Coupon rate (in percent): ");
+        double couponRate = bondScanner.nextDouble()/100;
+        System.out.println("Recovery rate (in percent): ");
+        double recoveryRate = bondScanner.nextDouble()/100;
+        System.out.println("Hazard rate (in percent): ");
+        double hazardRate = bondScanner.nextDouble()/100;
 
+        RiskyBond bond = new RiskyBond(yearsToMaturity, parValue, couponRate, recoveryRate, hazardRate, new HashMap<>());
 
-        double cva1 = CvaCalculator.calculateCva(bond1, riskFreeRate);
-        double cva2 = CvaCalculator.calculateCva(bond2, riskFreeRate);
-        double cva3 = CvaCalculator.calculateCva(bond3, riskFreeRate);
+        System.out.println("Calculating CVA for bond with " + bond.yearsToMaturity() + " years to maturity," +
+                " par value of " + bond.parValue() + ", coupon rate of " + bond.couponRateInPercent()*100 + "%, " +
+                "recovery rate of " + bond.recoveryRate()*100 + "% and hazard rate of " + bond.hazardRate()*100 + "%. \n" +
+                "The risk-free rate is " + riskFreeRate*100 + "%.");
+        double cva = CvaCalculator.calculateCva(bond, riskFreeRate);
 
-        System.out.println("Credit valuation adjustment of Bond 1 is " + cva1 + " GBP");
-        System.out.println("Credit valuation adjustment of Bond 2 is " + cva2 + " GBP");
-        System.out.println("Credit valuation adjustment of Bond 3 is " + cva3 + " GBP");
+        System.out.println("Credit valuation adjustment of your bond is " + cva);
     }
 }
