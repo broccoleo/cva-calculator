@@ -1,12 +1,13 @@
 package com.company;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        double riskFreeRate = 0.03;
+        double riskFreeRate = 0.0025;
         Scanner bondScanner = new Scanner(System.in);
         System.out.println("Welcome to CVA calculator. Please input the characteristics of your bond:");
         System.out.println("Years to maturity: ");
@@ -27,7 +28,8 @@ public class Main {
                 "recovery rate of " + bond.recoveryRate()*100 + "% and hazard rate of " + bond.hazardRate()*100 + "%. \n" +
                 "The risk-free rate is " + riskFreeRate*100 + "%.");
         double cva = CvaCalculator.calculateCva(bond, riskFreeRate);
+        DecimalFormat numberFormat = new DecimalFormat("#.000");
 
-        System.out.println("Credit valuation adjustment of your bond is " + cva);
+        System.out.println("Credit valuation adjustment of your bond is " + numberFormat.format(cva));
     }
 }
